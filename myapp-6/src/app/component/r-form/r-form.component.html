@@ -28,10 +28,27 @@
             />{{ gender }}
           </label>
         </div>
+        <div formArrayName="hobbies">
+          <div *ngIf="signUpForm?.get('hobbies') as hobbiesArray">
+            <div *ngFor="let hobby of hobbiesArray.value" class="form-group">
+              <input
+                type="text"
+                name=""
+                id=""
+                class="form-control"
+                [value]="hobby"
+              />
+            </div>
+          </div>
+        </div>
         <div class="mt-3">
           <button class="btn btn-primary w-100" type="submit">+</button>
         </div>
       </form>
     </div>
   </div>
+  <div class="container mt-3 w-100">
+    <button (click)="addHobby()" class="btn btn-success">Add Hobby</button>
+  </div>
 </div>
+{{title | uppercase}}
