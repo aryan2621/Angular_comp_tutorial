@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 export interface Response {
   [key: string]: any;
@@ -33,6 +33,10 @@ export class HttpService {
         .set('auth', '123456789')
         .append('auth', '123456789')
         .append('auth', '123456789'),
+
+      // observe is used to get the response from the server
+      // 'response' is used to get the full response from the server
+      observe: 'response',
     });
   }
   fetchPost() {
@@ -56,5 +60,9 @@ export class HttpService {
 
       this.http.post<FormGroup>(this.URL, post);
     });
+
+    // .pipe(tap) this is used to get the response from the server
+    // do some operation on the response without changing the response
+    // responseTYpe: 'text', this is used to get the response in text format
   }
 }
