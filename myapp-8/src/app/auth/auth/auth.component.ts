@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthResponseData, AuthService } from 'src/app/service/auth.service';
 
@@ -9,7 +10,7 @@ import { AuthResponseData, AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
   isLoginMode = true;
   isLoading = false;
   error = new Map<string, boolean>();
@@ -36,6 +37,7 @@ export class AuthComponent {
         authForm?.value.email,
         authForm?.value.password
       );
+      this.router.navigate(['user']);
     } else {
       authObs = this.authService.signUp(
         authForm?.value.email,
